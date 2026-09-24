@@ -3,267 +3,92 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MovieBox Premium</title>
+<title>MovieBox Premium - Official Mod Download</title>
 <style>
-  body { background-color: #0d0e12; color: white; font-family: Arial, sans-serif; margin: 0; padding: 0; overflow-x: hidden; padding-bottom: 70px; }
+  body { background-color: #0b0c10; color: #ffffff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; overflow-x: hidden; }
   * { box-sizing: border-box; }
   
-  /* Header */
-  .header { padding: 15px; position: sticky; top: 0; background-color: #0d0e12; z-index: 50; }
-  .search-box { background-color: #1a1c24; border-radius: 25px; padding: 10px 15px; display: flex; align-items: center; color: #888; font-size: 14px; cursor: pointer; }
+  /* Hero Section */
+  .hero { position: relative; height: 320px; background-image: url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=800&q=80'); background-size: cover; background-position: center; display: flex; align-items: flex-end; padding: 20px; border-bottom: 2px solid #1f2833; }
+  .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, #0b0c10 5%, rgba(11,12,16,0.5) 100%); }
   
-  /* Tabs System */
-  .tab-content { display: none; }
-  .tab-content.active { display: block; animation: fadeIn 0.3s ease; }
-  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .app-info { position: relative; z-index: 10; display: flex; gap: 15px; align-items: flex-end; bottom: -30px; }
+  .app-icon { width: 100px; height: 100px; border-radius: 22px; box-shadow: 0 8px 25px rgba(0,0,0,0.8); border: 2px solid #45a29e; background-color: #1f2833; object-fit: cover; }
+  .app-details h1 { margin: 0; font-size: 24px; text-shadow: 2px 2px 4px rgba(0,0,0,0.9); font-weight: 800; letter-spacing: 1px; }
+  .developer { color: #66fcf1; font-size: 13px; font-weight: bold; margin-top: 5px; text-shadow: 1px 1px 2px #000; display: flex; align-items: center; gap: 5px; }
 
-  /* Home Section */
-  .hero { position: relative; height: 250px; background-image: url('https://iili.io/nAr2Kut.md.jpg'); background-size: cover; background-position: top; margin-bottom: 15px; cursor: pointer; }
-  .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, #0d0e12, transparent); }
-  .play-btn { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(255,255,255,0.2); border: 1px solid white; padding: 8px 35px; border-radius: 25px; font-weight: bold; backdrop-filter: blur(5px); cursor: pointer; }
-  .section-title { padding: 0 15px; margin: 20px 0 10px 0; font-size: 17px; font-weight: bold; border-left: 3px solid #f39c12; margin-left: 10px; }
-  .scroll-row { display: flex; overflow-x: auto; gap: 12px; padding: 0 15px; scrollbar-width: none; }
-  .scroll-row::-webkit-scrollbar { display: none; }
-  .card { min-width: 120px; position: relative; cursor: pointer; }
-  .card img { width: 120px; height: 175px; object-fit: cover; border-radius: 8px; background-color: #222; }
-  .tag { position: absolute; top: 5px; right: 5px; background: #007bff; font-size: 9px; padding: 3px 6px; border-radius: 4px; font-weight: bold; }
+  /* Stats Section */
+  .stats { display: flex; justify-content: space-around; background-color: #1f2833; margin: 55px 15px 25px; padding: 15px; border-radius: 12px; text-align: center; font-size: 12px; color: #c5c6c7; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+  .stats b { display: block; font-size: 18px; color: #ffffff; margin-bottom: 5px; font-weight: 900; }
 
-  /* Find Section */
-  .list-item { display: flex; padding: 15px; border-bottom: 1px solid #1a1c24; gap: 15px; align-items: center; }
-  .list-item img { width: 70px; height: 100px; border-radius: 6px; object-fit: cover; }
-  .list-info { flex-grow: 1; }
-  .list-info h3 { margin: 0 0 5px 0; font-size: 16px; }
-  .list-info p { margin: 0; font-size: 12px; color: #888; }
-  .watch-btn { background: #f39c12; color: #000; border: none; padding: 8px 15px; border-radius: 20px; font-weight: bold; font-size: 12px; cursor: pointer; }
+  /* Download Button */
+  .download-section { padding: 0 15px; text-align: center; margin-bottom: 30px; }
+  .download-btn { display: block; background: linear-gradient(45deg, #45a29e, #66fcf1); color: #0b0c10; text-decoration: none; padding: 16px; border-radius: 30px; font-weight: 900; font-size: 18px; box-shadow: 0 8px 20px rgba(102, 252, 241, 0.3); transition: transform 0.2s; animation: pulse 2s infinite; text-transform: uppercase; letter-spacing: 1px; }
+  .download-info { font-size: 11px; color: #888; margin-top: 12px; font-weight: bold; }
 
-  /* TV Section */
-  .tv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 15px; }
-  .tv-card { background: #1a1c24; border-radius: 8px; overflow: hidden; text-align: center; padding-bottom: 10px; cursor: pointer; }
-  .tv-card img { width: 100%; height: 100px; object-fit: cover; margin-bottom: 10px; }
-  .tv-card span { font-weight: bold; font-size: 14px; }
+  @keyframes pulse {
+    0% { transform: scale(1); box-shadow: 0 8px 20px rgba(102, 252, 241, 0.3); }
+    50% { transform: scale(1.03); box-shadow: 0 12px 25px rgba(102, 252, 241, 0.5); }
+    100% { transform: scale(1); box-shadow: 0 8px 20px rgba(102, 252, 241, 0.3); }
+  }
 
-  /* Download Section */
-  .empty-state { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 60vh; color: #555; }
-  .empty-state h2 { margin: 10px 0 0 0; }
+  /* Screenshots */
+  .section-title { padding: 0 15px; margin: 20px 0 15px 0; font-size: 18px; font-weight: bold; border-left: 4px solid #45a29e; margin-left: 15px; color: #ffffff; }
+  .screenshots { display: flex; overflow-x: auto; gap: 12px; padding: 0 15px 20px; scrollbar-width: none; }
+  .screenshots::-webkit-scrollbar { display: none; }
+  .screenshots img { height: 240px; border-radius: 12px; border: 1px solid #1f2833; box-shadow: 0 4px 10px rgba(0,0,0,0.5); object-fit: cover; }
 
-  /* Me Section */
-  .profile-header { padding: 30px 20px; text-align: center; border-bottom: 1px solid #1a1c24; }
-  .avatar { width: 80px; height: 80px; background: #333; border-radius: 50%; display: inline-block; line-height: 80px; font-size: 40px; }
-  .server-log { padding: 20px; color: #ff3333; font-family: monospace; font-size: 12px; line-height: 1.5; background: #111; border: 1px solid #ff3333; margin: 15px; border-radius: 8px; }
-
-  /* Bottom Nav */
-  .bottom-nav { position: fixed; bottom: 0; width: 100%; background-color: #12141a; display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid #1a1c24; z-index: 50; }
-  .nav-item { display: flex; flex-direction: column; align-items: center; color: #888; font-size: 11px; gap: 4px; cursor: pointer; }
-  .nav-item.active { color: #f39c12; }
-
-  /* Error Popup */
-  #errorModal { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #1a1d29; padding: 25px 20px; border-radius: 15px; text-align: center; z-index: 100; width: 85%; border: 1px solid #333; box-shadow: 0 10px 30px rgba(0,0,0,0.9); }
-  #errorModal p { color: #ff4c4c; font-size: 17px; margin-bottom: 25px; font-weight: bold; }
-  #errorModal button { background: #f39c12; color: #fff; border: none; padding: 12px 30px; border-radius: 25px; cursor: pointer; font-weight: bold; font-size: 15px; width: 100%; }
-  .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 99; }
+  /* Features */
+  .features { padding: 0 15px 40px; }
+  .feature-item { display: flex; align-items: center; gap: 12px; background: #1f2833; padding: 14px; border-radius: 10px; margin-bottom: 12px; font-size: 14px; font-weight: 500; box-shadow: 0 4px 6px rgba(0,0,0,0.2); }
+  .feature-icon { font-size: 22px; }
 </style>
 </head>
 <body>
 
-  <!-- Top Search -->
-  <div class="header">
-    <div class="search-box" onclick="switchTab('find-tab', 'nav-find')"><span>🔍</span> Search for movies, series...</div>
-  </div>
-
-  <!-- TAB 1: HOME -->
-  <div id="home-tab" class="tab-content active">
-    <div class="hero" onclick="showError()"><div class="hero-overlay"></div><div class="play-btn">▶ PLAY NOW</div></div>
-
-    <!-- POPULAR MOVIES (20 Posters) -->
-    <div class="section-title">Popular Movies 🔥</div>
-    <div class="scroll-row">
-      <div class="card" onclick="showError()"><span class="tag">HD</span><img src="https://imgh.in/host/3wn9lx" onerror="fixImg(this)"></div>
-      <div class="card" onclick="showError()"><span class="tag">FHD</span><img src="https://imgh.in/host/5pcemu" onerror="fixImg(this)"></div>
-      <div class="card" onclick="showError()"><span class="tag">4K</span><img src="https://imgh.in/host/pbqgvw" onerror="fixImg(this)"></div>
-      <div class="card" onclick="showError()"><span class="tag">HD</span><img src="https://imgh.in/host/rpndfb" onerror="fixImg(this)"></div>
-      <div class="card" onclick="showError()"><span class="tag">FHD</span><img src="https://i.ibb.co/xqfCMY7x/Screenshot-20260924-130259-Google.jpg" onerror="fixImg(this)"></div>
-      <div class="card" onclick="showError()"><span class="tag">4K</span><img src="https://i.ibb.co/KxzRs0S3/Screenshot-20260924-130511-Google.jpg" onerror="fixImg(this)"></div>
-      <div class="card" onclick="showError()"><span class="tag">HD</span><img src="https://iili.io/nAg2Ret.th.jpg" onerror="fixImg(this)"></div>
-      <div class="card" onclick="showError()"><span class="tag">FHD</span><img src="https://iili.io/nAg25mX.th.jpg" onerror="fixImg(this)"></div>
-      <div class="card" onclick="showError()"><span class="tag">4K</span><img src="https://iili.io/nAg2CXa.th.jpg" onerror="fixImg(this)"></div>
-      <div class="card" onclick="showError()"><span class="tag">HD</span><img src="https://iili.io/nAgF1J2.md.jpg" onerror="fixImg(this)"></div>
-      <div class="card" onclick="showError()"><span class="tag">FHD</span><img src="https://iili.io/nAgFGO7.md.jpg" onerror="fixImg(this)"></div>
-      <div class="card" onclick="showError()"><span class="tag">4K</span><img src="https://iili.io/nAgFERS.md.jpg" onerror="fixImg(this)"></div>
-      <div class="card" onclick="showError()"><span class="tag">HD</span><img src="https://iili.io/nAgFlUl.md.jpg" onerror="fixImg(this)"></div>
-      <div class="card" onclick="showError()"><span class="tag">FHD</span><img src="https://iili.io/nAgFMb9.md.jpg" onerror="fixImg(this)"></div>
-      <div class="card" onclick="showError()"><span class="tag">4K</span><img src="https://iili.io/nAgFWxe.md.jpg" onerror="fixImg(this)"></div>
-      <div class="card" onclick="showError()"><span class="tag">HD</span><img src="https://iili.io/nAgqkJ4.md.jpg" onerror="fixImg(this)"></div>
-      <div class="card" onclick="showError()"><span class="tag">FHD</span><img src="https://iili.io/nAgqOgf.md.jpg" onerror="fixImg(this)"></div>
-      <div class="card" onclick="showError()"><span class="tag">4K</span><img src="https://iili.io/nAgqv5l.md.jpg" onerror="fixImg(this)"></div>
-      <div class="card" onclick="showError()"><span class="tag">HD</span><img src="https://iili.io/nAgq8e2.md.jpg" onerror="fixImg(this)"></div>
-      <div class="card" onclick="showError()"><span class="tag">FHD</span><img src="https://iili.io/nAgqSbS.md.jpg" onerror="fixImg(this)"></div>
-    </div>
-
-    <!-- UPCOMING MOVIES (20 Posters) -->
-    <div class="section-title">Upcoming 🚀</div>
-    <div class="scroll-row">
-      <div class="card" onclick="showError()"><span class="tag">HD</span><img src="https://iili.io/nAgVSWP.md.jpg" onerror="fixImg(this)"></div>
-      <div class="card" onclick="showError()"><span class="tag">FHD</span><img src="https://iili.io/nAgVMW7.md.jpg" onerror="fixImg(this)"></div>
-      <div class="card" onclick="showError()"><span class="tag">4K</span><img src="https://iili.io/nAgVUs1.md.jpg" onerror="fixImg(this)"></div>
-      <div class="card" onclick="showError()"><span class="tag">HD</span><img src="https://iili.io/nAgVkbV.md.jpg" onerror="fixImg(this)"></div>
-      <div class="card" onclick="showError()"><span class="tag">FHD</span><img src="https://iili.io/nAgVLeR.md.jpg" onerror="fixImg(this)"></div>
-      <div class="card" onclick="showError()"><span class="tag">4K</span><img src="https://iili.io/nAgVpqX.md.jpg" onerror="fixImg(this)"></div>
-      <div class="card" onclick="showError()"><span class="tag">HD</span><img src="https://iili.io/nAgW9gs.md.jpg" onerror="fixImg(this)"></div>
-      <div class="card" onclick="showError()"><span class="tag">FHD</span><img src="https://iili.io/nAgWJdG.md.jpg" onerror="fixImg(this)"></div>
-      <div class="card" onclick="showError()"><span class="tag">4K</span><img src="https://iili.io/nAgW3ml.md.jpg" onerror="fixImg(this)"></div>
-      <div class="card" onclick="showError()"><span class="tag">HD</span><img src="https://iili.io/nAgWKI2.md.jpg" onerror="fixImg(this)"></div>
-      <div class="card" onclick="showError()"><span class="tag">FHD</span><img src="https://iili.io/nAgWWIp.md.jpg" onerror="fixImg(this)"></div>
-      <div class="card" onclick="showError()"><span class="tag">4K</span><img src="https://iili.io/nAgWXhN.md.jpg" onerror="fixImg(this)"></div>
-      <div class="card" onclick="showError()"><span class="tag">HD</span><img src="https://iili.io/nAgWwBt.md.jpg" onerror="fixImg(this)"></div>
-      <div class="card" onclick="showError()"><span class="tag">FHD</span><img src="https://iili.io/nAgWNEX.md.jpg" onerror="fixImg(this)"></div>
-      <div class="card" onclick="showError()"><span class="tag">4K</span><img src="https://iili.io/nAgWvYG.md.jpg" onerror="fixImg(this)"></div>
-      <div class="card" onclick="showError()"><span class="tag">HD</span><img src="https://iili.io/nAgW8vf.md.jpg" onerror="fixImg(this)"></div>
-      <div class="card" onclick="showError()"><span class="tag">FHD</span><img src="https://iili.io/nAgWgTl.md.jpg" onerror="fixImg(this)"></div>
-      <div class="card" onclick="showError()"><span class="tag">4K</span><img src="https://iili.io/nAgWrj2.md.jpg" onerror="fixImg(this)"></div>
-      <div class="card" onclick="showError()"><span class="tag">HD</span><img src="https://iili.io/nAgW4QS.md.jpg" onerror="fixImg(this)"></div>
-      <div class="card" onclick="showError()"><span class="tag">FHD</span><img src="https://iili.io/nAgWPC7.md.jpg" onerror="fixImg(this)"></div>
-    </div>
-
-    <!-- SERIES (20 Posters) -->
-    <div class="section-title">Trending Series 📺</div>
-    <div class="scroll-row">
-      <div class="card" onclick="showError()"><span class="tag">HD</span><img src="https://iili.io/nAgmTIj.md.jpg" onerror="fixImg(this)"></div>
-      <div class="card" onclick="showError()"><span class="tag">FHD</span><img src="https://iili.io/nAgmzmb.md.jpg" onerror="fixImg(this)"></div>
-      <div class="card" onclick="showError()"><span class="tag">4K</span><img src="https://iili.io/nAgmo7e.md.jpg" onerror="fixImg(this)"></div>
-      <div class="card" onclick="showError()"><span class="tag">HD</span><img src="https://iili.io/nAgmxku.md.jpg" onerror="fixImg(this)"></div>
-      <div class="card" onclick="showError()"><span class="tag">FHD</span><img src="https://iili.io/nAgmuhx.md.jpg" onerror="fixImg(this)"></div>
-      <div class="card" onclick="showError()"><span class="tag">4K</span><img src="https://iili.io/nAgm5BV.md.jpg" onerror="fixImg(this)"></div>
-      <div class="card" onclick="showError()"><span class="tag">HD</span><img src="https://iili.io/nAgmYrP.md.jpg" onerror="fixImg(this)"></div>
-      <div class="card" onclick="showError()"><span class="tag">FHD</span><img src="https://iili.io/nAgmc21.md.jpg" onerror="fixImg(this)"></div>
-      <div class="card" onclick="showError()"><span class="tag">4K</span><img src="https://iili.io/nAgmlYF.md.jpg" onerror="fixImg(this)"></div>
-      <div class="card" onclick="showError()"><span class="tag">HD</span><img src="https://iili.io/nAgm0kg.md.jpg" onerror="fixImg(this)"></div>
-      <div class="card" onclick="showError()"><span class="tag">FHD</span><img src="https://iili.io/nAgmMhv.md.jpg" onerror="fixImg(this)"></div>
-      <div class="card" onclick="showError()"><span class="tag">4K</span><img src="https://iili.io/nAgmXBp.md.jpg" onerror="fixImg(this)"></div>
-      <div class="card" onclick="showError()"><span class="tag">HD</span><img src="https://iili.io/nAgmj4I.md.jpg" onerror="fixImg(this)"></div>
-      <div class="card" onclick="showError()"><span class="tag">FHD</span><img src="https://iili.io/nAgmOYX.md.jpg" onerror="fixImg(this)"></div>
-      <div class="card" onclick="showError()"><span class="tag">4K</span><img src="https://iili.io/nAgmSjf.md.jpg" onerror="fixImg(this)"></div>
-      <div class="card" onclick="showError()"><span class="tag">HD</span><img src="https://iili.io/nAgmUQ4.md.jpg" onerror="fixImg(this)"></div>
-      <div class="card" onclick="showError()"><span class="tag">FHD</span><img src="https://iili.io/nAgW4QS.md.jpg" onerror="fixImg(this)"></div>
-      <div class="card" onclick="showError()"><span class="tag">4K</span><img src="https://iili.io/nAgqkJ4.md.jpg" onerror="fixImg(this)"></div>
-      <div class="card" onclick="showError()"><span class="tag">HD</span><img src="https://iili.io/nAgp3yg.md.jpg" onerror="fixImg(this)"></div>
-      <div class="card" onclick="showError()"><span class="tag">FHD</span><img src="https://iili.io/nAgpda1.md.jpg" onerror="fixImg(this)"></div>
+  <!-- Hero & App Icon -->
+  <div class="hero">
+    <div class="hero-overlay"></div>
+    <div class="app-info">
+      <!-- STABLE PREMIUM ICON -->
+      <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=200&q=80" alt="MovieBox Logo" class="app-icon">
+      <div class="app-details">
+        <h1>MovieBox Premium</h1>
+        <div class="developer">✓ Modded by Thai Syndicate (v9.4)</div>
+      </div>
     </div>
   </div>
 
-  <!-- TAB 2: FIND -->
-  <div id="find-tab" class="tab-content">
-    <div class="section-title">Search Results (482 found)</div>
-    <div id="find-list"></div> 
+  <!-- Fake App Stats -->
+  <div class="stats">
+    <div><b>4.9 ★</b>2.1M Reviews</div>
+    <div><b>70 MB</b>Size</div>
+    <div><b>10M+</b>Downloads</div>
   </div>
 
-  <!-- TAB 3: TV -->
-  <div id="tv-tab" class="tab-content">
-    <div class="section-title">Live TV & Channels 📡</div>
-    <div class="tv-grid" id="tv-list"></div> 
+  <!-- THE REAL MEDIAFIRE DOWNLOAD BUTTON -->
+  <div class="download-section">
+    <a href="https://www.mediafire.com/file/0awyv6psehccnv8/Movie_box_primiyam.apk/file" class="download-btn">⬇ Download APK (70 MB)</a>
+    <div class="download-info">🛡️ 100% Safe & Secure • Anti-Ban Enabled • No Root</div>
   </div>
 
-  <!-- TAB 4: DOWNLOAD -->
-  <div id="download-tab" class="tab-content">
-    <div class="empty-state">
-      <span style="font-size: 50px;">📥</span>
-      <h2>No Downloads Yet</h2>
-      <p>Your offline movies will appear here.</p>
-    </div>
+  <!-- Screenshots from high quality web sources -->
+  <div class="section-title">App Interface & Quality</div>
+  <div class="screenshots">
+    <img src="https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?w=300&q=80">
+    <img src="https://images.unsplash.com/photo-1594909122845-11baa439b7bf?w=300&q=80">
+    <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=300&q=80">
+    <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=300&q=80">
   </div>
 
-  <!-- TAB 5: ME -->
-  <div id="me-tab" class="tab-content">
-    <div class="profile-header">
-      <div class="avatar">👤</div>
-      <h2 style="margin: 10px 0 0 0;">Guest_9942</h2>
-      <p style="color: #888; margin: 5px 0;">Premium Lifetime Active</p>
-    </div>
-    
-    <div class="server-log">
-      <strong>[ERROR: FATAL REGION LOCK DETECTED]</strong><br><br>
-      SYSTEM HALTED. This application uses ultra-secure geo-fenced relay nodes. Connection rejected from current ISP.<br><br>
-      <strong>SUPPORTED SERVER REGIONS (64 ACTIVE):</strong> Indonesia, Brazil, Thailand, USA, Russia, China, Japan, South Korea, Philippines, Vietnam, Malaysia, Singapore, Australia, UK, Germany, France, Italy, Spain, Canada, Mexico, Argentina, Chile, Peru, Colombia, Venezuela, South Africa, Egypt, Nigeria, Kenya, Saudi Arabia, UAE, Turkey, Iran, Iraq, Israel, Pakistan, Bangladesh, Sri Lanka, Nepal, Myanmar, Cambodia, Laos, Brunei, Taiwan, Hong Kong, Macau, South Sudan, Ethiopia, Ghana, Morocco, Algeria, Tunisia, Libya, Sudan, Somalia, Uganda, Rwanda, Tanzania, Zambia, Zimbabwe, Angola, Mozambique, Madagascar.<br><br>
-      <strong>>>> STRICTLY NO INDIA SERVERS DETECTED <<<</strong><br><br>
-      App Engine: Quantum-Geo-Lock v9.4<br>
-      Firmware Requirement: Snapdragon 8 Gen 4+ or Custom Thai-ROM.<br><br>
-      <i>this app made by salazaar & group modder by thailend.</i><br><br>
-      Any attempt to bypass via VPN will result in a permanent MAC ban. Device architecture arm64-v8a mismatch detected.
-    </div>
+  <!-- Fake Features -->
+  <div class="section-title">Premium Features Unlocked</div>
+  <div class="features">
+    <div class="feature-item"><span class="feature-icon">🔓</span> Unlocked All 4K Movies & Web Series</div>
+    <div class="feature-item"><span class="feature-icon">🚫</span> Zero Ads (Ad-Free Experience)</div>
+    <div class="feature-item"><span class="feature-icon">🌍</span> 64 Premium VIP Servers Enabled</div>
+    <div class="feature-item"><span class="feature-icon">⚡</span> High-Speed Direct Downloading</div>
   </div>
-
-  <!-- Bottom Nav -->
-  <div class="bottom-nav">
-    <div class="nav-item active" id="nav-home" onclick="switchTab('home-tab', 'nav-home')"><span class="nav-icon">🏠</span>Home</div>
-    <div class="nav-item" id="nav-find" onclick="switchTab('find-tab', 'nav-find')"><span class="nav-icon">🔍</span>Find</div>
-    <div class="nav-item" id="nav-tv" onclick="switchTab('tv-tab', 'nav-tv')"><span class="nav-icon">📺</span>TV</div>
-    <div class="nav-item" id="nav-download" onclick="switchTab('download-tab', 'nav-download')"><span class="nav-icon">⬇️</span>Download</div>
-    <div class="nav-item" id="nav-me" onclick="switchTab('me-tab', 'nav-me')"><span class="nav-icon">👤</span>Me</div>
-  </div>
-
-  <!-- Error Modal Script -->
-  <div class="overlay" id="overlay" onclick="closeError()"></div>
-  <div id="errorModal">
-    <p>Your device is not compatible with this version.</p>
-    <button onclick="closeError()">OK</button>
-  </div>
-
-  <script>
-    // Link tootne par default poster
-    function fixImg(img) {
-      img.src = 'https://images.unsplash.com/photo-1594909122845-11baa439b7bf?w=300&q=80';
-    }
-
-    // Tabs switch karne ka logic
-    function switchTab(tabId, navId) {
-      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-      document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
-      
-      document.getElementById(tabId).classList.add('active');
-      document.getElementById(navId).classList.add('active');
-      window.scrollTo(0,0);
-    }
-
-    // Error dikhane ka logic
-    function showError() {
-      if (navigator.vibrate) { navigator.vibrate(50); }
-      document.getElementById('errorModal').style.display = 'block';
-      document.getElementById('overlay').style.display = 'block';
-    }
-    function closeError() {
-      document.getElementById('errorModal').style.display = 'none';
-      document.getElementById('overlay').style.display = 'none';
-    }
-
-    // Find tab lists
-    const findList = document.getElementById('find-list');
-    const titles = ["Money Heist", "Stranger Things", "Breaking Bad", "Squid Game", "Dark", "The Boys", "Game of Thrones", "Loki"];
-    for(let i=0; i<30; i++) {
-      let randomTitle = titles[Math.floor(Math.random() * titles.length)] + " - Season " + (Math.floor(Math.random() * 5) + 1);
-      findList.innerHTML += `
-        <div class="list-item" onclick="showError()">
-          <img src="https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?w=200&q=80">
-          <div class="list-info">
-            <h3>${randomTitle}</h3>
-            <p>DUB • 4K UHD • 2026</p>
-          </div>
-          <button class="watch-btn">Watch Now</button>
-        </div>
-      `;
-    }
-
-    // TV tab lists
-    const tvList = document.getElementById('tv-list');
-    const channels = ["HBO HD", "Star Movies", "Nat Geo", "Cinemax", "Fox Action", "Sports HD", "Cartoon Network", "Discovery"];
-    for(let i=0; i<16; i++) {
-      let ch = channels[Math.floor(Math.random() * channels.length)];
-      tvList.innerHTML += `
-        <div class="tv-card" onclick="showError()">
-          <img src="https://images.unsplash.com/photo-1595769816263-9b910be24d5f?w=300&q=80">
-          <span>${ch}</span>
-        </div>
-      `;
-    }
-  </script>
 
 </body>
 </html>
